@@ -1,56 +1,45 @@
-# Welcome to your Expo app 👋
+# Dossier React Native con Expo – 2.º DAM
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Alumno:** Carlos Marrero Martín
+**Módulo:** Programación Multimedia y Dispositivos Móviles
 
-## Get started
+## Cómo ejecutar
 
-1. Install dependencies
+1. `npm install`
+2. Lanzar en los emuladores (no hace falta abrirlos antes, Expo los arranca):
+   - Android: `npm run android`
+   - iOS: `npm run ios`
+   - Los dos a la vez: `npm run emuladores`
 
-   ```bash
-   npm install
-   ```
+Todas las prácticas se abren desde el índice (`src/app/index.tsx`).
 
-2. Start the app
+## Estado de las prácticas
 
-   ```bash
-   npx expo start
-   ```
+| Práctica | Descripción | Estado |
+|---|---|---|
+| 1 | Hola mundo | ✅ |
+| 2 | Contador con dos botones | ⏳ |
+| 3 | InicioScreen y estilos separados | ⏳ |
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Práctica 1 – Hola mundo
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+**Procedimiento:**
+1. Limpié la plantilla de Expo para dejar solo la pantalla de inicio en `src/app/index.tsx`.
+2. Cambié el texto por `¡Hola mundo! Soy Carlos`, centrado con `justifyContent` y `alignItems`.
+3. Moví los estilos a un `StyleSheet` (estilo `pantalla`) con fondo `lightpink`.
+4. Configuré ESLint (`eslint.config.js`) y comprobé el código con `npm run lint` y `npx tsc --noEmit`.
+5. Lo ejecuté en el emulador de Android y en el simulador de iOS.
 
-## Get a fresh project
+**Captura:** ![P1](capturas/p01.png)
 
-When you're ready, run:
+**Problemas encontrados:**
+Tuve problemas para abrir la app en los emuladores. Lo solucioné ajustando los scripts de `package.json`:
+- `"android": "expo start --localhost --android"`
+- `"ios": "expo start --localhost --ios"`
+- `"emuladores": "expo start --localhost --android --ios"` (nuevo, abre los dos a la vez)
 
-```bash
-npm run reset-project
-```
+Después de este cambio la app cargó correctamente en el Pixel 9 Pro (Android) y en el iPhone 17 (iOS).
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+**Estado:** ✅ Terminada
