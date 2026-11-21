@@ -1,5 +1,5 @@
-import InicioScreen from '../screens/InicioScreen';
+import PrincipalScreen from '../screens/PrincipalScreen';
 
 export default function Index() {
-  return <InicioScreen />;
+  return <PrincipalScreen />;
 }

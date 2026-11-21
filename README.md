@@ -20,6 +20,7 @@ Todas las prácticas se abren desde el índice (`src/app/index.tsx`).
 | 1 | Hola mundo | ✅ |
 | 2 | Contador con dos botones | ✅ |
 | 3 | InicioScreen y estilos separados | ✅ |
+| 4 | PrincipalScreen con tres cajas | ✅ |
 
 ---
 
@@ -106,5 +107,31 @@ src/
 
 **Problemas encontrados:**
 Ninguno.
+
+**Estado:** ✅ Terminada
+
+## Práctica 4 – PrincipalScreen con varias cajas
+
+**Procedimiento:**
+
+1. Creé el componente reutilizable `src/components/Caja.tsx`, que recibe dos propiedades:
+   - `nombre`: el texto que se muestra dentro de la caja.
+   - `bg` (opcional): el color de fondo; si no se pasa, es `green`.
+
+   La caja mide 100 × 100 y combina el estilo base con el color recibido mediante `style={[styles.caja, { backgroundColor: bg }]}`.
+2. Creé la pantalla `src/screens/PrincipalScreen.tsx` con:
+   - Un `Text` con «Contenedor Principal», centrado y en amarillo.
+   - Un `View` de escenario con `flex: 1`, fondo `#fbfbfb`, `padding: 10` y `gap: 10` entre las cajas.
+   - Tres `Caja`: **Caja A** (`brown`), **Caja B** (`purple`) y **Caja C** (color por defecto, `green`).
+3. Cambié `src/app/index.tsx` para que muestre `<PrincipalScreen />` en lugar de `<InicioScreen />`. La pantalla del contador sigue guardada en `src/screens/`.
+4. Comprobé el código con `npm run lint` y `npx tsc --noEmit`.
+5. Lo ejecuté en el simulador de iOS (iPhone 16e) y en el emulador de Android.
+
+Como en React Native los contenedores van en columna por defecto (`flexDirection: 'column'`), las tres cajas aparecen una debajo de otra, pegadas a la izquierda.
+
+**Captura:** ![P4](capturas/p04.png)
+
+**Problemas encontrados:**
+En iOS la cabecera de la navegación («index») es transparente y el contenido queda por debajo: el texto «Contenedor Principal» se mete en la zona de la muesca y el título «index» se superpone al escenario. En Android se ve correctamente.
 
 **Estado:** ✅ Terminada
