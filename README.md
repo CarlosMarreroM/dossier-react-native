@@ -19,7 +19,7 @@ Todas las prácticas se abren desde el índice (`src/app/index.tsx`).
 |---|---|---|
 | 1 | Hola mundo | ✅ |
 | 2 | Contador con dos botones | ✅ |
-| 3 | InicioScreen y estilos separados | ⏳ |
+| 3 | InicioScreen y estilos separados | ✅ |
 
 ---
 
@@ -67,5 +67,44 @@ Después de este cambio la app cargó correctamente en el Pixel 9 Pro (Android) 
 
 **Problemas encontrados:**
 Ninguno. La práctica funcionó a la primera en los dos emuladores.
+
+**Estado:** ✅ Terminada
+
+## Práctica 3 – InicioScreen y estilos separados
+
+**Procedimiento:**
+
+1. Creé la carpeta `src/screens/` para guardar las pantallas fuera de `src/app/`, que queda solo para las rutas de Expo Router.
+2. Guardé el «Hola mundo» de la práctica 1 en `src/screens/HolaMundoScreen.tsx` para no perderlo.
+3. Moví el contador de la práctica 2 a `src/screens/InicioScreen.tsx`, con sus estilos declarados en `StyleSheet.create()` (`pantalla`, `caja`, `texto` y `botones`).
+4. Dejé `src/app/index.tsx` solo importando y mostrando la pantalla:
+
+   ```tsx
+   import InicioScreen from '../screens/InicioScreen';
+
+   export default function Index() {
+     return <InicioScreen />;
+   }
+   ```
+
+5. Comprobé que no había errores de importación con `npm run lint` y `npx tsc --noEmit`.
+6. Lo ejecuté en el emulador de Android y en el simulador de iOS y comprobé que el contador sigue funcionando igual que en la práctica 2.
+
+**Estructura resultante:**
+
+```text
+src/
+├── app/
+│   ├── _layout.tsx
+│   └── index.tsx            → muestra <InicioScreen />
+└── screens/
+    ├── HolaMundoScreen.tsx  → práctica 1
+    └── InicioScreen.tsx     → práctica 2 (contador)
+```
+
+**Captura:** el resultado visual es el mismo que en la práctica 2 ([captura P2](capturas/p02.png)), porque solo se ha reorganizado el código.
+
+**Problemas encontrados:**
+Ninguno.
 
 **Estado:** ✅ Terminada
