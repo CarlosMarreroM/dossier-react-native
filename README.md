@@ -21,6 +21,7 @@ Todas las prácticas se abren desde el índice (`src/app/index.tsx`).
 | 2 | Contador con dos botones | ✅ |
 | 3 | InicioScreen y estilos separados | ✅ |
 | 4 | PrincipalScreen con tres cajas | ✅ |
+| 5 | Modificar flex dinámicamente | ✅ |
 
 ---
 
@@ -133,5 +134,27 @@ Como en React Native los contenedores van en columna por defecto (`flexDirection
 
 **Problemas encontrados:**
 En iOS la cabecera de la navegación («index») es transparente y el contenido queda por debajo: el texto «Contenedor Principal» se mete en la zona de la muesca y el título «index» se superpone al escenario. En Android se ve correctamente.
+
+**Estado:** ✅ Terminada
+
+## Práctica 5 – Modificar flex dinámicamente
+
+**Procedimiento:**
+
+1. Creé el componente `src/components/CajaFlex.tsx`, una variante de `Caja` **sin altura fija**, para que el `height: 100` no condicione el reparto de `flex`.
+2. Cada `CajaFlex` tiene su propio estado `valorFlex` (`useState(0)`), así que los valores de las tres cajas son independientes. Se aplica con `style={[styles.caja, { flex: valorFlex, backgroundColor: bg }]}`.
+3. Añadí dos botones a cada caja:
+   - **+**: `setValorFlex(f => f + 1)`
+   - **−**: `setValorFlex(f => Math.max(0, f - 1))`, para que no baje de 0.
+4. Muestro el valor actual en el texto de la caja (`Caja A - Flex: 3`).
+5. Creé `src/screens/FlexScreen.tsx` con el mismo escenario de la práctica 4 y las tres `CajaFlex`, y la mostré desde `src/app/index.tsx`.
+6. Comprobé el código con `npm run lint` y `npx tsc --noEmit` y lo probé en Android (Pixel 9 Pro) y en iOS (iPhone 16e).
+
+**Resultado:** el espacio libre se reparte en proporción a los valores. Por ejemplo, con A = 3, B = 1 y C = 1, la caja A ocupa 3/5 del escenario. Una caja con `flex: 0` no desaparece: se queda con el tamaño de su contenido.
+
+**Captura:** ![P5](capturas/p05.png)
+
+**Problemas encontrados:**
+Los botones `−` y `+` usan `color="black"`. En Android se ven como botones negros, pero en iOS ese color se aplica solo al texto y apenas se distinguen sobre el fondo morado (se ve en la captura). Es la diferencia del `Button` nativo entre sistemas; se solucionaría con un botón propio hecho con `Pressable`.
 
 **Estado:** ✅ Terminada

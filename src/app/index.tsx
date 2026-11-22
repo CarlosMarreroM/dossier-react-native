@@ -1,5 +1,5 @@
-import PrincipalScreen from '../screens/PrincipalScreen';
+import FlexScreen from '../screens/FlexScreen';
 
 export default function Index() {
-  return <PrincipalScreen />;
+  return <FlexScreen />;
 }
