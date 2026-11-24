@@ -1,5 +1,5 @@
-import TouchScreen from '../screens/TouchScreen';
+import EstilosScreen from '../screens/EstilosScreen';
 
 export default function Index() {
-  return <TouchScreen />;
+  return <EstilosScreen />;
 }

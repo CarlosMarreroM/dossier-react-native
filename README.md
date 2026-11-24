@@ -23,6 +23,7 @@ Todas las prácticas se abren desde el índice (`src/app/index.tsx`).
 | 4 | PrincipalScreen con tres cajas | ✅ |
 | 5 | Modificar flex dinámicamente | ✅ |
 | 6 | Sustituir los botones por componentes táctiles | ✅ |
+| 7 | Nombre y estilos personalizados | ✅ |
 
 ---
 
@@ -187,5 +188,52 @@ Los botones `−` y `+` usan `color="black"`. En Android se ven como botones neg
 
 - `Alert.alert()` no detiene la ejecución: la alerta aparece y el valor se actualiza a la vez. Además, dentro del `onPress` la variable `valorFlex` todavía tiene el valor anterior, porque `setValorFlex` no la cambia al momento sino en el siguiente render. Por eso el mensaje de la alerta muestra `valorFlex + 1`.
 - Con un `underlayColor` claro (`#ddd`), el texto blanco del botón casi no se veía al pulsarlo. Lo cambié por un gris oscuro (`#555`).
+
+**Estado:** ✅ Terminada
+
+## Práctica 7 – Nombre y estilos personalizados
+
+**Procedimiento:**
+
+1. Amplié el componente `src/components/Caja.tsx` con una nueva propiedad **opcional** `style`, del tipo `StyleProp<ViewStyle>`:
+
+   ```tsx
+   import type { StyleProp, ViewStyle } from 'react-native';
+
+   type Props = {
+     nombre: string;
+     bg?: string;
+     style?: StyleProp<ViewStyle>;
+   };
+   ```
+
+   - `ViewStyle` limita la propiedad a estilos válidos para un `View` (por ejemplo, TypeScript no permite `fontSize`).
+   - `StyleProp` permite recibir cualquier cosa que acepte la prop `style`: un objeto, un estilo de `StyleSheet` o un array de estilos.
+   - Al ser opcional (`?`), la práctica 4 sigue funcionando sin cambios: allí no se pasa `style` y la caja se ve igual que antes.
+2. Añadí el estilo recibido **al final** del array de estilos de la caja:
+
+   ```tsx
+   <View style={[styles.caja, { backgroundColor: bg }, style]}>
+   ```
+
+   React Native fusiona los estilos de izquierda a derecha y, si dos tienen la misma propiedad, gana el último. Así, quien usa la caja puede añadir estilos nuevos o sobrescribir los del componente. Cuando no se pasa `style`, vale `undefined` y se ignora.
+3. Creé la pantalla `src/screens/EstilosScreen.tsx`, a partir de `PrincipalScreen`, con tres cajas que muestran su nombre:
+   - **Caja A** (`brown`): sin `style`, para comprobar que la propiedad es opcional.
+   - **Caja B** (`purple`): con esquinas redondeadas y un borde distinto: `style={{ borderRadius: 20, borderWidth: 7, borderColor: 'gold' }}`.
+   - **Caja C** (color por defecto): con `style={{ width: 150 }}`, que sobrescribe el `width: 100` del estilo base porque va después en el array.
+4. Mostré la pantalla desde `src/app/index.tsx` y comprobé que `PrincipalScreen` (práctica 4) se sigue viendo igual que antes.
+5. Comprobé el código con `npm run lint` y `npx tsc --noEmit` y lo probé en Android (Pixel 9 Pro) y en iOS (iPhone 16e).
+
+**Captura:** ![P7](capturas/p07.png)
+
+**Observación sobre el color:**
+Al añadir `style` hay dos formas de dar color a la caja: la propiedad `bg` y un `backgroundColor` dentro de `style`. Si se usan las dos a la vez, gana el de `style`, porque va el último en el array. Lo dejé así a propósito:
+
+- `bg` es un atajo cómodo para el caso habitual y `style` permite sobrescribir cualquier propiedad, incluido el color. Es el comportamiento habitual en los componentes de React Native.
+- Poner `bg` al final no funcionaría bien: como tiene valor por defecto (`green`), siempre taparía el `backgroundColor` de `style`.
+- Eliminar `bg` obligaría a modificar la práctica 4.
+
+**Problemas encontrados:**
+Ninguno.
 
 **Estado:** ✅ Terminada
