@@ -1,3 +1,7 @@
+/**
+ * Práctica 4 · PrincipalScreen con varias cajas
+ * Escenario con tres componentes Caja de distinto color, colocados en columna.
+ */
 import { StyleSheet, Text, View } from 'react-native';
 import Caja from '../components/Caja';
 

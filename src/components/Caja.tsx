@@ -1,4 +1,8 @@
-// src/components/Caja.tsx
+/**
+ * Componente Caja (práctica 4, ampliado en la práctica 7).
+ * Caja de 100 × 100 que muestra un nombre y un color de fondo (`bg`, verde por defecto).
+ * P7: prop opcional `style` que se aplica al final y puede sobrescribir el estilo base.
+ */
 import { StyleSheet, Text, View, StyleProp, ViewStyle } from 'react-native';
 
 type Props = { 

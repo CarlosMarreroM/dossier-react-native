@@ -1,3 +1,7 @@
+/**
+ * Práctica 7 · Nombre y estilos personalizados
+ * Tres cajas que usan la prop opcional `style` de Caja para cambiar su aspecto.
+ */
 import { StyleSheet, Text, View } from 'react-native';
 import Caja from '../components/Caja';
 
@@ -7,7 +11,7 @@ export default function EstilosScreen() {
         <Text style={styles.texto}>Práctica 7 · Estilos</Text>
         <View style={styles.escenario}>
             <Caja nombre="Caja A" bg="brown" style={{borderRadius: 20}} />
-            <Caja nombre="Caja B" bg="purple" style={{ borderRadius: 20, borderWidth: 5, borderColor: 'silver' }} />
+            <Caja nombre="Caja B" bg="purple" style={{ borderRadius: 20, borderWidth: 5, borderColor: 'gold' }} />
             <Caja nombre="Caja C" />
         </View>
     </View>

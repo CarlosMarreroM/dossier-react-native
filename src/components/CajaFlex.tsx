@@ -1,4 +1,7 @@
-// src/components/CajaFlex.tsx
+/**
+ * Componente CajaFlex (práctica 5).
+ * Caja sin altura fija con su propio estado de flex y botones nativos + / − para cambiarlo.
+ */
 import { useState } from 'react';
 
 import { StyleSheet, Text, View, Button} from 'react-native';

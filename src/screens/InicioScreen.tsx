@@ -1,3 +1,8 @@
+/**
+ * Prácticas 2 y 3 · Contador
+ * Contador con dos botones (incrementar y decrementar) dentro de una caja con borde.
+ * Hecho en la práctica 2 y separado en su propia pantalla en la práctica 3.
+ */
 import { useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 

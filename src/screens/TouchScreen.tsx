@@ -1,3 +1,7 @@
+/**
+ * Práctica 6 · Componentes táctiles
+ * Igual que FlexScreen, pero con CajaTouch (botones táctiles personalizados).
+ */
 import { StyleSheet, Text, View } from 'react-native';
 import CajaTouch from '../components/CajaTouch';
 

@@ -1,4 +1,8 @@
-// src/components/CajaTouch.tsx
+/**
+ * Componente CajaTouch (práctica 6).
+ * Versión de CajaFlex con TouchableOpacity (−) y TouchableHighlight (+, con alerta).
+ * El botón − se desactiva y se pone gris cuando flex vale 0.
+ */
 import { useState } from 'react';
 
 import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, Alert} from 'react-native';

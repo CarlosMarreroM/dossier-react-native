@@ -1,10 +1,14 @@
+/**
+ * Práctica 5 · Modificar flex dinámicamente
+ * Escenario con tres CajaFlex que se reparten el espacio según su valor de flex.
+ */
 import { StyleSheet, Text, View } from 'react-native';
 import CajaFlex from '../components/CajaFlex';
 
 export default function FlexScreen() {
   return (
     <View style={styles.pantalla}>
-        <Text style={styles.texto}>Práctica 5 · Reparto con flexl </Text>
+        <Text style={styles.texto}>Práctica 5 · Reparto con flex </Text>
         <View style={styles.escenario}>
             <CajaFlex nombre="Caja A" bg="brown" />
             <CajaFlex nombre="Caja B" bg="purple" />
