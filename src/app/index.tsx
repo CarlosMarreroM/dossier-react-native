@@ -1,5 +1,5 @@
-import FlexScreen from '../screens/FlexScreen';
+import TouchScreen from '../screens/TouchScreen';
 
 export default function Index() {
-  return <FlexScreen />;
+  return <TouchScreen />;
 }

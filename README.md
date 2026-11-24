@@ -22,6 +22,7 @@ Todas las prácticas se abren desde el índice (`src/app/index.tsx`).
 | 3 | InicioScreen y estilos separados | ✅ |
 | 4 | PrincipalScreen con tres cajas | ✅ |
 | 5 | Modificar flex dinámicamente | ✅ |
+| 6 | Sustituir los botones por componentes táctiles | ✅ |
 
 ---
 
@@ -156,5 +157,35 @@ En iOS la cabecera de la navegación («index») es transparente y el contenido 
 
 **Problemas encontrados:**
 Los botones `−` y `+` usan `color="black"`. En Android se ven como botones negros, pero en iOS ese color se aplica solo al texto y apenas se distinguen sobre el fondo morado (se ve en la captura). Es la diferencia del `Button` nativo entre sistemas; se solucionaría con un botón propio hecho con `Pressable`.
+
+**Estado:** ✅ Terminada
+
+## Práctica 6 – Sustituir los botones por componentes táctiles
+
+**Procedimiento:**
+
+1. Para no perder la práctica 5, creé un componente nuevo, `src/components/CajaTouch.tsx`, a partir de `CajaFlex`. `CajaFlex.tsx` no se ha modificado.
+2. Sustituí los `Button` nativos por componentes táctiles, que no tienen aspecto propio y envuelven un `Text` con mi propio estilo:
+   - **+** con `TouchableHighlight`: muestra una alerta con `Alert.alert()` y aumenta el valor con `setValorFlex(f => f + 1)`. Al pulsarlo aparece un fondo gris oscuro (`underlayColor="#555"`).
+   - **−** con `TouchableOpacity`: reduce el valor con `setValorFlex(f => Math.max(0, f - 1))`. Al pulsarlo se vuelve semitransparente.
+3. Personalicé los dos botones con `StyleSheet.create()` (estilo `boton`): fondo negro, `borderRadius: 8`, `padding` y texto blanco en negrita de tamaño 18.
+4. Desactivé el botón **−** cuando el valor es 0 con `disabled={valorFlex === 0}`. Como `disabled` no cambia el aspecto del botón, añadí un estilo condicional que lo pone en gris:
+
+   ```tsx
+   style={[styles.boton, desactivado && styles.botonDesactivado]}
+   ```
+
+   Si `desactivado` es `false`, React Native ignora ese valor dentro del array de estilos.
+5. Creé `src/screens/TouchScreen.tsx` con el mismo escenario de la práctica 5 y las tres `CajaTouch`, y la mostré desde `src/app/index.tsx`.
+6. Comprobé el código con `npm run lint` y `npx tsc --noEmit` y lo probé en Android (Pixel 9 Pro) y en iOS (iPhone 16e).
+
+**Resultado:** los botones se ven igual en Android y en iOS, porque su aspecto lo define mi estilo y no el sistema operativo. Esto resuelve el problema de la práctica 5, donde el `Button` nativo se veía distinto en cada sistema.
+
+**Captura:** ![P6](capturas/p06.png)
+
+**Problemas encontrados:**
+
+- `Alert.alert()` no detiene la ejecución: la alerta aparece y el valor se actualiza a la vez. Además, dentro del `onPress` la variable `valorFlex` todavía tiene el valor anterior, porque `setValorFlex` no la cambia al momento sino en el siguiente render. Por eso el mensaje de la alerta muestra `valorFlex + 1`.
+- Con un `underlayColor` claro (`#ddd`), el texto blanco del botón casi no se veía al pulsarlo. Lo cambié por un gris oscuro (`#555`).
 
 **Estado:** ✅ Terminada
