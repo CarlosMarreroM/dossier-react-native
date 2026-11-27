@@ -24,6 +24,7 @@ Todas las prácticas se abren desde el índice (`src/app/index.tsx`).
 | 5 | Modificar flex dinámicamente | ✅ |
 | 6 | Sustituir los botones por componentes táctiles | ✅ |
 | 7 | Nombre y estilos personalizados | ✅ |
+| 8 | Círculos dinámicos | ✅ |
 
 ---
 
@@ -235,5 +236,53 @@ Al añadir `style` hay dos formas de dar color a la caja: la propiedad `bg` y un
 
 **Problemas encontrados:**
 Ninguno.
+
+**Estado:** ✅ Terminada
+
+## Práctica 8 – Círculos dinámicos
+
+**Procedimiento:**
+
+1. Creé el componente reutilizable `src/components/BotonControl.tsx`: un `TouchableOpacity` con un `Text` que recibe por props el título (`titulo`) y la función a ejecutar (`onPress: () => void`). Todos los controles de la pantalla lo usan.
+2. Creé `src/screens/CirculosScreen.tsx` con tres estados:
+   - `colores` (`useState<string[]>([])`): los colores de los círculos. El escenario empieza vacío.
+   - `enFila`: alterna entre `flexDirection: 'row'` y `'column'`.
+   - `conWrap`: alterna entre `flexWrap: 'wrap'` y `'nowrap'`.
+3. El botón **Añadir círculo** calcula un color a partir del número de círculos y lo añade al array creando uno nuevo: `setColores(actual => [...actual, color])`. Los valores RGB se limitan con `Math.min(255, valor)` para que no superen 255.
+4. Los círculos se pintan con `colores.map(...)`: cada uno es un `View` de 50 × 50 con `borderRadius: 25`, y usa el índice como `key`, ya que solo se añaden al final.
+5. Los botones **wrap/nowrap** y **row/column** invierten su estado con `setValor(v => !v)` y muestran el modo activo. El escenario aplica `flexDirection` y `flexWrap` con un operador ternario.
+6. Añadí un botón **Vaciar** para reiniciar el escenario durante las pruebas.
+7. Comprobé el código con `npm run lint` y `npx tsc --noEmit` y lo probé en Android (Pixel 9 Pro) y en iOS (iPhone 16e).
+
+**Resultado:** con `nowrap`, los círculos se colocan en una sola línea aunque no quepan y se salen del escenario. Con `wrap`, al llegar al borde pasan a la fila (o columna) siguiente.
+
+**Captura:** ![P8](capturas/p08.png)
+
+**Problemas encontrados:**
+En el simulador de iOS (iPhone 16e, iOS 26) **ningún botón respondía**, aunque se veían bien. El código de los botones era correcto: el problema era la cabecera de navegación.
+
+- `src/app/_layout.tsx` usaba `<Stack />` sin opciones, así que Expo Router añade una cabecera nativa con el nombre de la ruta («index»).
+- En iOS 26 esa cabecera es transparente (efecto «cristal líquido») y la pantalla se dibuja por debajo de ella. Es el mismo problema que vi en la práctica 4, donde «index» se superponía al contenido.
+- Aunque no se vea, la cabecera es una capa nativa que está **por encima** del contenido y recibe los toques. Como los botones estaban justo en esa franja superior, los toques nunca les llegaban.
+
+**Solución:**
+
+1. Oculté la cabecera nativa en `src/app/_layout.tsx`:
+
+   ```tsx
+   return <Stack screenOptions={{ headerShown: false }} />;
+   ```
+
+2. Al quitar la cabecera, el contenido empieza en el borde superior de la pantalla y quedaría debajo de la muesca y de la barra de estado. Para evitarlo, cambié el `View` raíz de `CirculosScreen` por un `SafeAreaView` de `react-native-safe-area-context`, que añade el margen necesario en cada dispositivo:
+
+   ```tsx
+   import { SafeAreaView } from 'react-native-safe-area-context';
+
+   <SafeAreaView style={styles.pantalla}>
+     ...
+   </SafeAreaView>
+   ```
+
+Después de estos cambios, los botones funcionan en iOS y el título ya no se mezcla con «index».
 
 **Estado:** ✅ Terminada

@@ -36,10 +36,10 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --localhost --android",
-    "ios": "expo start --localhost --ios",
+    "android": "node scripts/expo-local.js --android",
+    "ios": "node scripts/expo-local.js --ios",
     "web": "expo start --web",
-    "emuladores": "expo start --localhost --android --ios",
+    "emuladores": "node scripts/expo-local.js --android --ios",
     "lint": "expo lint"
   },
   "private": true
