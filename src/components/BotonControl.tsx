@@ -1,3 +1,8 @@
+/**
+ * Componente BotonControl (práctica 8).
+ * Botón personalizado con TouchableOpacity, reutilizable en varias pantallas.
+ * Recibe el texto (`titulo`) y la función que se ejecuta al pulsar (`onPress`).
+ */
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 type Props = {

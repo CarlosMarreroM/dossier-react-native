@@ -1,3 +1,8 @@
+/**
+ * Práctica 8 · Círculos dinámicos
+ * Añade círculos de color variable a un escenario y alterna flexWrap (wrap/nowrap)
+ * y flexDirection (row/column) para ver cómo se colocan.
+ */
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
