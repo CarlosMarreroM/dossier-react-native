@@ -30,7 +30,7 @@ export default function CajaTouch({ nombre, bg = 'green' }: Props) {
               Alert.alert('Flex aumentado', `${nombre} pasa a flex ${valorFlex + 1}`);
               setValorFlex(f => f + 1)
             }}
-            underlayColor="#ddd"
+            underlayColor="#555"
             style={styles.boton}
           >
             <Text style={styles.textoBoton}>+</Text>
